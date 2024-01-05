@@ -2,7 +2,9 @@
 #include "clientversion.h"       // holds the needed client version information
 
 #define VER_PRODUCTVERSION     LITEDOGE_VERSION_MAJOR,LITEDOGE_VERSION_MINOR,LITEDOGE_VERSION_REVISION,LITEDOGE_VERSION_BUILD
+#define VER_PRODUCTVERSION_STR STRINGIZE(CLIENT_VERSION_MAJOR) "." STRINGIZE(CLIENT_VERSION_MINOR) "." STRINGIZE(CLIENT_VERSION_REVISION) "." STRINGIZE(CLIENT_VERSION_BUILD)
 #define VER_FILEVERSION        VER_PRODUCTVERSION
+#define VER_FILEVERSION_STR    VER_PRODUCTVERSION_STR
 
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
@@ -16,13 +18,13 @@ BEGIN
         BEGIN
             VALUE "CompanyName",        "Litedoge"
             VALUE "FileDescription",    "litedoged (Litedoge node with a JSON-RPC server)"
-            VALUE "FileVersion",        PACKAGE_VERSION
+            VALUE "FileVersion",        VER_PRODUCTVERSION_STR
             VALUE "InternalName",       "litedoged"
-            VALUE "LegalCopyright",     COPYRIGHT_STR
+            VALUE "LegalCopyright",     "The Bitcoin developers, The NovaCoin & PPCoin developers, The BlackCoin developers, The Litedoge Developers. " 
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "litedoged.exe"
-            VALUE "ProductName",        "litedoged"
-            VALUE "ProductVersion",     PACKAGE_VERSION
+            VALUE "OriginalFilename",   "litedoge-qt.exe"
+            VALUE "ProductName",        "litedoge-QT"
+            VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END
 
