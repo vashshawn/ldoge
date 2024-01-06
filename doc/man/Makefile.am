@@ -5,7 +5,7 @@ if BUILD_BITCOIND
 endif
 
 if ENABLE_QT
-  dist_man1_MANS+=litedogen-qt.1
+  dist_man1_MANS+=litedoge-qt.1
 endif
 
 if BUILD_BITCOIN_CLI
