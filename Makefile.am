@@ -1,5 +1,6 @@
-# Copyright (c) 2012-2023 The Peercoin developers
-# Copyright (c) 2013-2020 The Bitcoin Core developers
+# Copyright (c) 2012-2024 The Peercoin developers
+# Copyright (c) 2013-2024 The Bitcoin Core developers
+# Copyright (c) 2013-2024 The Litedoge Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -110,7 +111,7 @@ $(OSX_APP)/Contents/Resources/litedoge.icns: $(OSX_INSTALLER_ICONS)
 
 $(OSX_APP)/Contents/MacOS/Litedoge-Qt: all-recursive
 	$(MKDIR_P) $(@D)
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $(BITCOIN_QT_BIN) $@
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $(LITEDOGE_QT_BIN) $@
 
 $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings:
 	$(MKDIR_P) $(@D)
