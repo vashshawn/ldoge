@@ -305,7 +305,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(sendCoinsAction);
 
     receiveCoinsAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and peercoin: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and litedoge: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(QStringLiteral("Alt+3")));
@@ -382,9 +382,9 @@ void BitcoinGUI::createActions()
     verifyMessageAction = new QAction(tr("&Verify Message..."), this);
     verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Litedoge addresses"));
     m_load_psbt_action = new QAction(tr("&Load PSBT from file…"), this);
-    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Bitcoin Transaction"));
+    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Litedoge Transaction"));
     m_load_psbt_clipboard_action = new QAction(tr("Load PSBT from &clipboard…"), this);
-    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Bitcoin Transaction from clipboard"));
+    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Litedoge Transaction from clipboard"));
 
     openRPCConsoleAction = new QAction(tr("Node window"), this);
     openRPCConsoleAction->setStatusTip(tr("Open node debugging and diagnostic console"));
@@ -398,7 +398,7 @@ void BitcoinGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(tr("Open &URI…"), this);
-    openAction->setStatusTip(tr("Open a peercoin: URI"));
+    openAction->setStatusTip(tr("Open a litedoge: URI"));
 
     showHelpMessageAction = new QAction(tr("&Command-line Options"), this);
 
@@ -434,7 +434,7 @@ void BitcoinGUI::createActions()
     openChatroomAction->setStatusTip(tr("Open the Litedoge Discord chat in a web browser."));
 
     openForumAction = new QAction(tr("&Forum"), this);
-    openForumAction->setStatusTip(tr("Open talk.peercoin.net in a web browser."));
+    openForumAction->setStatusTip(tr("Open https://litedogeofficial.org in a web browser."));
 
     m_mask_values_action = new QAction(tr("&Mask values"), this);
     m_mask_values_action->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_M));
@@ -1073,19 +1073,19 @@ void BitcoinGUI::gotoLoadPSBT(bool from_clipboard)
 }
 
 void BitcoinGUI::openWeb() {
-    QDesktopServices::openUrl(QUrl("https://peercoin.net"));
+    QDesktopServices::openUrl(QUrl("https://litedogeofficial.org"));
 }
 
 void BitcoinGUI::openDonate() {
-    QDesktopServices::openUrl(QUrl("https://www.peercoin.net/foundation"));
+    QDesktopServices::openUrl(QUrl("https://litedogeofficial.org"));
 }
 
 void BitcoinGUI::openChatroom() {
-    QDesktopServices::openUrl(QUrl("https://discord.gg/XPxfwtG"));
+    QDesktopServices::openUrl(QUrl("https://discord.gg/kkBmV7UDaZ"));
 }
 
 void BitcoinGUI::openForum() {
-    QDesktopServices::openUrl(QUrl("https://talk.peercoin.net"));
+    QDesktopServices::openUrl(QUrl("https://litedogeofficial.org"));
 }
 
 #endif // ENABLE_WALLET
