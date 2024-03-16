@@ -55,8 +55,8 @@ QString BitcoinUnits::description(Unit unit)
 {
     switch (unit) {
     case Unit::BTC: return QString("LiteDoges");
-    case Unit::mBTC: return QString("Milli-LiteDoges (1 / 1" THIN_SP_UTF8 "000)");
-    case Unit::uBTC: return QString("Micro-LiteDoges (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case Unit::mBTC: return QString("Milli-LiteDoges ("Milli-LiteDoges (1 / 1,000)")");
+    case Unit::uBTC: return QString("Micro-LiteDoges ("Micro-LiteDoges (1 / 1,000,000)");
     case Unit::SAT: return QString("Ltoshi  (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     } // no default case, so the compiler can warn about missing cases
     assert(false);
@@ -65,10 +65,10 @@ QString BitcoinUnits::description(Unit unit)
 qint64 BitcoinUnits::factor(Unit unit)
 {
     switch (unit) {
-    case Unit::BTC: return 1'000'000;
-    case Unit::mBTC: return 1'000;
+    case Unit::BTC: return 100000000;
+    case Unit::mBTC: return 100000;
     case Unit::uBTC: return 100;
-    case Unit::SAT: return 1;
+    case Unit::SAT: return 100000000;
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
@@ -76,27 +76,26 @@ qint64 BitcoinUnits::factor(Unit unit)
 int BitcoinUnits::decimals(Unit unit)
 {
     switch (unit) {
-    case Unit::BTC: return 8;
-    case Unit::mBTC: return 5;
-    case Unit::uBTC: return 2;
+    case Unit::BTC: return 8; 
+    case Unit::mBTC: return 11; 
+    case Unit::uBTC: return 14;
     case Unit::SAT: return 0;
-    } // no default case, so the compiler can warn about missing cases
-    assert(false);
+    } 
 }
 
 QString BitcoinUnits::format(Unit unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, bool justify)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
-    qint64 n = (qint64)nIn;
+    if(!valid(unit))
+        return QString(); // Refuse to format invalid unit
     qint64 coin = factor(unit);
     int num_decimals = decimals(unit);
     qint64 n_abs = (n > 0 ? n : -n);
     qint64 quotient = n_abs / coin;
+    qint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
-    if (justify) {
-        quotient_str = quotient_str.rightJustified(MAX_DIGITS_BTC - num_decimals, ' ');
-    }
+    QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
 
     // Use SI-style thin space separators as these are locale independent and can't be
     // confused with the decimal marker.
@@ -131,7 +130,7 @@ QString BitcoinUnits::format(Unit unit, const CAmount& nIn, bool fPlus, Separato
 
 QString BitcoinUnits::formatWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
-    return format(unit, amount, plussign, separators) + QString(" ") + shortName(unit);
+    return format(unit, amount, plussign) + QString(" ") + name(unit);
 }
 
 QString BitcoinUnits::formatHtmlWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
@@ -161,7 +160,7 @@ bool BitcoinUnits::parse(Unit unit, const QString& value, CAmount* val_out)
     int num_decimals = decimals(unit);
 
     // Ignore spaces and thin spaces when parsing
-    QStringList parts = removeSpaces(value).split(".");
+    QStringList parts = value.split(".");
 
     if(parts.size() > 2)
     {
@@ -244,9 +243,9 @@ qint8 ToQint8(BitcoinUnit unit)
 BitcoinUnit FromQint8(qint8 num)
 {
     switch (num) {
-    case 0: return BitcoinUnit::BTC;
-    case 1: return BitcoinUnit::mBTC;
-    case 2: return BitcoinUnit::uBTC;
+    case 0: return BitcoinUnit::LDOGE;
+    case 1: return BitcoinUnit::mLDOGE;
+    case 2: return BitcoinUnit::uLDOGE;
     case 3: return BitcoinUnit::SAT;
     }
     assert(false);
